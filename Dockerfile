@@ -11,12 +11,13 @@ RUN apt-get update && apt install -y --force-yes --no-install-recommends \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
+ADD config.nginx /etc/nginx/sites-enabled/default
+
 WORKDIR /app
 
-ADD config.nginx /etc/nginx/sites-enabled/default
 ADD distributions.conf ./htdocs/apt/conf/distributions
 ADD startup.sh .
 
 EXPOSE 80
 VOLUME /data
-ENTRYPOINT ["/startup.sh"]
+ENTRYPOINT ["bash", "/app/startup.sh"]
