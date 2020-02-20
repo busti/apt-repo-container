@@ -17,5 +17,6 @@ ADD config.nginx /etc/nginx/sites-enabled/default
 ADD distributions.conf ./htdocs/apt/conf/distributions
 ADD startup.sh .
 
+EXPOSE 80
 VOLUME /data
 ENTRYPOINT ["/startup.sh"]
