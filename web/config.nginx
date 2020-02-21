@@ -1,7 +1,7 @@
 server {
 	listen 80 default_server;
 
-	root /app/htdocs;
+	root /htdocs;
 	index index.html index.htm;
 
     location / {
