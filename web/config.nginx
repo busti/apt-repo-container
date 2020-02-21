@@ -1,10 +1,16 @@
-server {
-	listen 80 default_server;
+events {
+    worker_connections  4096;  ## Default: 1024
+}
 
-	root /htdocs;
-	index index.html index.htm;
+http {
+    server {
+        listen 80 default_server;
 
-    location / {
-        autoindex on;
+        root /htdocs;
+        index index.html index.htm;
+
+        location / {
+            autoindex on;
+        }
     }
 }

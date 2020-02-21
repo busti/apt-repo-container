@@ -6,4 +6,4 @@ ADD config.nginx /etc/nginx/nginx.conf
 
 VOLUME /htdocs
 
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
