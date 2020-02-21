@@ -10,11 +10,12 @@ RUN apt-get update && apt install -y --force-yes --no-install-recommends \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app
+ADD startup.sh .
+
+ADD distributions.conf /app/conf/distributions
+
 VOLUME /in
 VOLUME /out
-
-WORKDIR /app
-ADD distributions.conf ./apt/conf/distributions
-ADD startup.sh .
 
 ENTRYPOINT ["bash", "/app/startup.sh"]
