@@ -5,7 +5,16 @@ inotifywait -m /in -e create -e moved_to |
   while read path action file; do
     if [[ "$file" =~ .*deb$ ]]; then
       echo "found '$file' via '$action' in '$path'"
-      sleep 10
-      reprepro -b /out includedeb trusty "$path$file"
+      while [ 1 ]; do
+        res=$( reprepro -b /out includedeb trusty "$path$file" 2>&1 )
+        echo "reprepro returned: '$res'"
+        if [[ $res =~ "error" ]]; then
+          echo "retrying"
+          sleep 0.5
+        else
+          echo "successfully added package"
+          break
+        fi
+      done
     fi
   done
