@@ -13,6 +13,8 @@ inotifywait -m /in -e create -e moved_to |
           sleep 0.5
         else
           echo "successfully added package"
+          echo "removing artifact: '$path$file'"
+          rm "$path$file"
           break
         fi
       done
