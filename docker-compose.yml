@@ -8,6 +8,13 @@ services:
   web:
     build: ./web
     ports:
-      - 8080:80
+      - '8080:80'
     volumes:
       - ./repo:/htdocs
+  sftp:
+    image: atmoz/sftp
+    volumes:
+      - ./packages:/home/default/upload
+    ports:
+      - '2222:22'
+    command: default:changeme:::upload
