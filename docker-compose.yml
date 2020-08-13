@@ -1,20 +1,23 @@
-version: '2'
+version: '3'
 services:
   repo:
     build: ./reprepro
     volumes:
-      - ./repo:/out
-      - ./packages:/in
+      - ./repo:/out:rw
+      - ./packages:/in:rw
+    restart: always
   web:
     build: ./web
     ports:
-      - '8080:80'
+      - '8090:80'
     volumes:
-      - ./repo:/htdocs
+      - ./repo:/htdocs:rw
+    restart: always
   sftp:
     image: atmoz/sftp
     volumes:
-      - ./packages:/home/default/upload
+      - ./packages:/home/default/upload:rw
     ports:
       - '2222:22'
     command: default:changeme:::upload
+    restart: always
